@@ -1,0 +1,348 @@
+From 17e673ecad18c95a7f090e7d11b9e5bc32a630ee Mon Sep 17 00:00:00 2001
+From: oge1ata <yomacorp54@gmail.com>
+Date: Sat, 13 Apr 2024 23:04:14 +0100
+Subject: [PATCH] Completed task two
+
+---
+ .idea/.gitignore                              |  3 +
+ .idea/forage-jpmc-swe-task-2.iml              | 14 +++++
+ .../inspectionProfiles/profiles_settings.xml  |  6 ++
+ .idea/misc.xml                                |  7 +++
+ .idea/modules.xml                             |  8 +++
+ .idea/vcs.xml                                 |  6 ++
+ package-lock.json                             | 16 ++++--
+ src/App.tsx                                   | 49 +++++++++-------
+ src/Graph.tsx                                 | 57 +++++++++++--------
+ 9 files changed, 117 insertions(+), 49 deletions(-)
+ create mode 100644 .idea/.gitignore
+ create mode 100644 .idea/forage-jpmc-swe-task-2.iml
+ create mode 100644 .idea/inspectionProfiles/profiles_settings.xml
+ create mode 100644 .idea/misc.xml
+ create mode 100644 .idea/modules.xml
+ create mode 100644 .idea/vcs.xml
+
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+index 0000000..26d3352
+--- /dev/null
++++ b/.idea/.gitignore
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
+diff --git a/.idea/forage-jpmc-swe-task-2.iml b/.idea/forage-jpmc-swe-task-2.iml
+new file mode 100644
+index 0000000..89fc03c
+--- /dev/null
++++ b/.idea/forage-jpmc-swe-task-2.iml
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/venv" />
++    </content>
++    <orderEntry type="jdk" jdkName="Python 3.11 (forage-jpmc-swe-task-2)" jdkType="Python SDK" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++  <component name="PyDocumentationSettings">
++    <option name="format" value="PLAIN" />
++    <option name="myDocStringFormat" value="Plain" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/.idea/inspectionProfiles/profiles_settings.xml b/.idea/inspectionProfiles/profiles_settings.xml
+new file mode 100644
+index 0000000..105ce2d
+--- /dev/null
++++ b/.idea/inspectionProfiles/profiles_settings.xml
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+index 0000000..c195d2d
+--- /dev/null
++++ b/.idea/misc.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Black">
++    <option name="sdkName" value="Python 3.11 (forage-jpmc-swe-task-2)" />
++  </component>
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (forage-jpmc-swe-task-2)" project-jdk-type="Python SDK" />
++</project>
+\ No newline at end of file
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+index 0000000..2afa09c
+--- /dev/null
++++ b/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/forage-jpmc-swe-task-2.iml" filepath="$PROJECT_DIR$/.idea/forage-jpmc-swe-task-2.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+index 0000000..35eb1dd
+--- /dev/null
++++ b/.idea/vcs.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/package-lock.json b/package-lock.json
+index 21b4315..20acb14 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -4392,9 +4392,9 @@
+       }
+     },
+     "node_modules/caniuse-lite": {
+-      "version": "1.0.30001373",
+-      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001373.tgz",
+-      "integrity": "sha512-pJYArGHrPp3TUqQzFYRmP/lwJlj8RCbVe3Gd3eJQkAV8SAC6b19XS9BjMvRdvaS8RMkaTN8ZhoHP6S1y8zzwEQ==",
++      "version": "1.0.30001609",
++      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001609.tgz",
++      "integrity": "sha512-JFPQs34lHKx1B5t1EpQpWH4c+29zIyn/haGsbpfq3suuV9v56enjFt23zqijxGTMwy1p/4H2tjnQMY+p1WoAyA==",
+       "funding": [
+         {
+           "type": "opencollective",
+@@ -4403,6 +4403,10 @@
+         {
+           "type": "tidelift",
+           "url": "https://tidelift.com/funding/github/npm/caniuse-lite"
++        },
++        {
++          "type": "github",
++          "url": "https://github.com/sponsors/ai"
+         }
+       ]
+     },
+@@ -23678,9 +23682,9 @@
+       }
+     },
+     "caniuse-lite": {
+-      "version": "1.0.30001373",
+-      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001373.tgz",
+-      "integrity": "sha512-pJYArGHrPp3TUqQzFYRmP/lwJlj8RCbVe3Gd3eJQkAV8SAC6b19XS9BjMvRdvaS8RMkaTN8ZhoHP6S1y8zzwEQ=="
++      "version": "1.0.30001609",
++      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001609.tgz",
++      "integrity": "sha512-JFPQs34lHKx1B5t1EpQpWH4c+29zIyn/haGsbpfq3suuV9v56enjFt23zqijxGTMwy1p/4H2tjnQMY+p1WoAyA=="
+     },
+     "capture-exit": {
+       "version": "1.2.0",
+diff --git a/src/App.tsx b/src/App.tsx
+index 0728518..d585c43 100755
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1,13 +1,14 @@
+-import React, { Component } from 'react';
+-import DataStreamer, { ServerRespond } from './DataStreamer';
+-import Graph from './Graph';
+-import './App.css';
++import React, { Component } from "react";
++import DataStreamer, { ServerRespond } from "./DataStreamer";
++import Graph from "./Graph";
++import "./App.css";
+ 
+ /**
+  * State declaration for <App />
+  */
+ interface IState {
+-  data: ServerRespond[],
++  data: ServerRespond[];
++  showGraph: boolean;
+ }
+ 
+ /**
+@@ -22,6 +23,7 @@ class App extends Component<{}, IState> {
+       // data saves the server responds.
+       // We use this state to parse data down to the child element (Graph) as element property
+       data: [],
++      showGraph: false,
+     };
+   }
+ 
+@@ -29,18 +31,25 @@ class App extends Component<{}, IState> {
+    * Render Graph react component with state.data parse as property data
+    */
+   renderGraph() {
+-    return (<Graph data={this.state.data}/>)
++    if (this.state.showGraph) {
++      return (<Graph data={this.state.data} />)
++    }
+   }
+ 
+   /**
+    * Get new data from server and update the state with the new data
+    */
+   getDataFromServer() {
+-    DataStreamer.getData((serverResponds: ServerRespond[]) => {
+-      // Update the state by creating a new array of data that consists of
+-      // Previous data in the state and the new data from server
+-      this.setState({ data: [...this.state.data, ...serverResponds] });
+-    });
++    let x = 0;
++    const interval = setInterval(() => {
++      DataStreamer.getData((serverResponds: ServerRespond[]) => {
++        this.setState({ data: serverResponds, showGraph: true });
++      });
++      x++;
++      if (x > 1000) {
++        clearInterval(interval);
++      }
++    }, 100);
+   }
+ 
+   /**
+@@ -49,25 +58,25 @@ class App extends Component<{}, IState> {
+   render() {
+     return (
+       <div className="App">
+-        <header className="App-header">
+-          Bank & Merge Co Task 2
+-        </header>
++        <header className="App-header">Bank & Merge Co Task 2</header>
+         <div className="App-content">
+-          <button className="btn btn-primary Stream-button"
++          <button
++            className="btn btn-primary Stream-button"
+             // when button is click, our react app tries to request
+             // new data from the server.
+             // As part of your task, update the getDataFromServer() function
+             // to keep requesting the data every 100ms until the app is closed
+             // or the server does not return anymore data.
+-            onClick={() => {this.getDataFromServer()}}>
++            onClick={() => {
++              this.getDataFromServer();
++            }}
++          >
+             Start Streaming Data
+           </button>
+-          <div className="Graph">
+-            {this.renderGraph()}
+-          </div>
++          <div className="Graph">{this.renderGraph()}</div>
+         </div>
+       </div>
+-    )
++    );
+   }
+ }
+ 
+diff --git a/src/Graph.tsx b/src/Graph.tsx
+index 3b2a7da..78d2dee 100644
+--- a/src/Graph.tsx
++++ b/src/Graph.tsx
+@@ -1,21 +1,21 @@
+-import React, { Component } from 'react';
+-import { Table } from '@finos/perspective';
+-import { ServerRespond } from './DataStreamer';
+-import './Graph.css';
++import React, { Component } from "react";
++import { Table } from "@finos/perspective";
++import { ServerRespond } from "./DataStreamer";
++import "./Graph.css";
+ 
+ /**
+  * Props declaration for <Graph />
+  */
+ interface IProps {
+-  data: ServerRespond[],
++  data: ServerRespond[];
+ }
+ 
+ /**
+  * Perspective library adds load to HTMLElement prototype.
+  * This interface acts as a wrapper for Typescript compiler.
+  */
+-interface PerspectiveViewerElement {
+-  load: (table: Table) => void,
++interface PerspectiveViewerElement extends HTMLElement {
++  load: (table: Table) => void;
+ }
+ 
+ /**
+@@ -27,20 +27,29 @@ class Graph extends Component<IProps, {}> {
+   table: Table | undefined;
+ 
+   render() {
+-    return React.createElement('perspective-viewer');
++    return React.createElement("perspective-viewer");
+   }
+ 
+   componentDidMount() {
+     // Get element to attach the table from the DOM.
+-    const elem: PerspectiveViewerElement = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement;
++    const elem = (document.getElementsByTagName(
++      "perspective-viewer"
++    )[0] as unknown) as PerspectiveViewerElement;
+ 
++    elem.setAttribute("view", "y_line");
++    elem.setAttribute("column-pivots", '["stock"]');
++    elem.setAttribute("row-pivots", '["timestamp"]');
++    elem.setAttribute("columns", '["top_ask_price"]');
++    elem.setAttribute("aggregates", `{"stock": "distinct count", "top_ask_price":"avg", "top_bid_price":"avg", "timestamp": "distinct count"} `);
++
++    
+     const schema = {
+-      stock: 'string',
+-      top_ask_price: 'float',
+-      top_bid_price: 'float',
+-      timestamp: 'date',
++      stock: "string",
++      top_ask_price: "float",
++      top_bid_price: "float",
++      timestamp: "date",
+     };
+-
++    
+     if (window.perspective && window.perspective.worker()) {
+       this.table = window.perspective.worker().table(schema);
+     }
+@@ -57,15 +66,17 @@ class Graph extends Component<IProps, {}> {
+     if (this.table) {
+       // As part of the task, you need to fix the way we update the data props to
+       // avoid inserting duplicated entries into Perspective table again.
+-      this.table.update(this.props.data.map((el: any) => {
+-        // Format the data from ServerRespond to the schema
+-        return {
+-          stock: el.stock,
+-          top_ask_price: el.top_ask && el.top_ask.price || 0,
+-          top_bid_price: el.top_bid && el.top_bid.price || 0,
+-          timestamp: el.timestamp,
+-        };
+-      }));
++      this.table.update(
++        this.props.data.map((el: any) => {
++          // Format the data from ServerRespond to the schema
++          return {
++            stock: el.stock,
++            top_ask_price: (el.top_ask && el.top_ask.price) || 0,
++            top_bid_price: (el.top_bid && el.top_bid.price) || 0,
++            timestamp: el.timestamp,
++          };
++        })
++      );
+     }
+   }
+ }
+-- 
+2.42.0.windows.2
+
